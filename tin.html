@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Envelope Confession</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #ffcccc, #ffe6f2, #ff69b4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .envelope {
+            position: relative;
+            width: 400px;
+            height: 250px;
+            background: #f8c8d8; /* Soft pastel pink for Valentine's theme */
+            border-radius: 5px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -1px 0 rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.5s ease, opacity 1s ease;
+            z-index: 2;
+        }
+        .envelope:hover {
+            transform: scale(1.05);
+        }
+        .envelope.disappear {
+            transform: translateY(-100vh) scale(0.8);
+            opacity: 0;
+        }
+        /* Fold lines for paper texture */
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+        }
+        .envelope::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(0,0,0,0.1), transparent);
+        }
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: #f0b8c8; /* Gentle variation of pastel pink */
+            border-radius: 5px 5px 0 0;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transition: transform 1s ease;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .envelope.opened .flap {
+            transform: translateY(-100%); /* Lifts the tip upward */
+        }
+        .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2em;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+        .ribbon {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 10px;
+            background: linear-gradient(90deg, #ff69b4, #ff1493, #ff69b4); /* Soft pinks */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            width: 80%;
+            max-width: 600px;
+            height: 80vh;
+            background: #f5f5dc;
+            border: 5px double #dc143c;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.2);
+            opacity: 0;
+            overflow-y: auto;
+            transition: all 1.5s ease 1s;
+            z-index: 1;
+            font-family: 'Georgia', serif;
+        }
+        .envelope.opened ~ .letter {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .header h1 {
+            font-size: 2em;
+            color: #dc143c;
+            margin: 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .content {
+            text-align: left;
+            color: #333;
+            line-height: 1.8;
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        .content p {
+            margin: 15px 0;
+        }
+        .hearts {
+            text-align: center;
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+        .letter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23ff69b4" opacity="0.05"/></svg>') repeat;
+            pointer-events: none;
+            border-radius: 15px;
+        }
+        @media (max-width: 600px) {
+            .envelope {
+                width: 90%;
+                height: auto;
+                min-height: 200px;
+            }
+            .letter {
+                width: 90%;
+                height: 90vh;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="envelope" class="envelope">
+        <div class="flap"></div>
+        <div class="stamp">💖</div>
+        <div class="ribbon"></div>
+    </div>
+    <div class="letter">
+        <div class="header">
+            <h1>Dear Tin,</h1>
+        </div>
+        <div class="content">
+            <p>you probably already know some of this, but hearing it from me is different.</p>
+            <p>before we even met in real life, nakita na tika sa fb suggestions and i remember thinking, “this is my type.” when you accepted my friend request, i was genuinely happy. that was around june.</p>
+            <p>when balangaw auditions happened, i didn’t expect nga didto magsugod tanan. ikaw nauna sa akoa, and your performance honestly shook me. when it was my turn, i realized i wanted to impress you. from then on, i wanted to get close to you.</p>
+            <p>as time passed, during practices, interviews, and all the small moments, we talked more, laughed more, and i felt a connection growing. dili ko kaingon nga infatuation ra ni, kay pila na ka months ni, since july pa. i tried to avoid it, tried to move on, but somehow, the feeling always came back.</p>
+            <p>and it’s not because of your looks or anything physical. it’s because of you, who you truly are. your energy, your kindness, the way you are with people.</p>
+            <p>i’m not saying this to expect anything or to make things awkward. i just wanted to be honest, for my own peace too.</p>
+            <p>i like you, martin.</p>
+            <p>(play “Ako Na Lang” by Zia Quizon)</p>
+            <p>yours truly,</p>
+            <p>@rordinaury</p>
+        </div>
+        <div class="hearts">
+            <span>❤️</span><span>💕</span><span>❤️</span><span>💖</span><span>❤️</span>
+        </div>
+    </div>
+    <script>
+        const envelope = document.getElementById('envelope');
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('opened');
+            setTimeout(() => {
+                envelope.classList.add('disappear');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
